@@ -1,0 +1,63 @@
+* {
+    font-family: 'Yantramanav', sans-serif;
+}
+
+#heading {
+    background: transparent;
+    min-height: 100%;
+    position: relative;
+    background: url("../images/bgimg.jpg") center center fixed no-repeat;
+    background-size: cover;
+}
+
+#heading .intro-text {
+    text-align: center;
+    color: #fff;
+    padding: 18% 0;
+    text-weight: bolder;
+    text-shadow: 0px 0px 3px #000;
+}
+
+#heading h1,
+h1.text-center.jumbo-text {
+    font-size: 70px;
+    font-family: 'Anton', sans-serif;
+}
+
+#heading p {
+    font-size: 30px;
+}
+
+.jumbotron {
+    margin-top: 2%;
+}
+
+.no-results {
+    color: #d0cfd0;
+}
+
+.panel.panel-primary {
+    padding: 2%;
+    border: 2px solid rgba(0, 0, 0, .125);
+}
+
+section#searc-results,
+section#saved-articles {
+    margin-bottom: 8%;
+}
+
+.btn {
+    margin: 1%;
+}
+
+.footer {
+    background-color: #efefef;
+    color: #d0cfd0;
+    position: fixed;
+    bottom: 0;
+    width: 100vw
+}
+
+.footer p {
+    padding-top: 1%;
+}
