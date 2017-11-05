@@ -6,7 +6,7 @@ mongoUrl = require("./client/keys"),
 Article = require("./client/models/Article"),
 SearchHistory = require("./client/models/History"),
 mongoose = require("mongoose"),
-dbURL = "mongodb://localhost/reactingtimes",
+dbURL = process.env.MONGODB_URI || "mongodb://localhost/reactingtimes",
 PORT = process.env.PORT || 3001;
 app = express();
 
