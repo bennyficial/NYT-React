@@ -1,12 +1,12 @@
-const express = require('express'),
-colors = require("colors"),
-bodyParser = require("body-parser"),
-logger = require("morgan"),
-mongoUrl = require("./client/keys"),
-Article = require("./client/models/Article"),
-SearchHistory = require("./client/models/History"),
-mongoose = require("mongoose"),
-dbURL = process.env.MONGODB_URI || "mongodb://localhost/reactingtimes",
+const express = require('express');
+colors = require("colors");
+bodyParser = require("body-parser");
+logger = require("morgan");
+mongoUrl = require("./client/keys");
+Article = require("./client/models/Article");
+SearchHistory = require("./client/models/History");
+mongoose = require("mongoose");
+dbURL = process.env.MONGODB_URI || "mongodb://localhost/nytreact";
 PORT = process.env.PORT || 3001;
 app = express();
 
@@ -63,6 +63,24 @@ Article
         }
     })
 })
+const db = mongoose.connection;
+
+db.on("error", error => console.log("Database Error:", error));
+
+db.once("open", () => console.log("Mongoose connection successful."));
+
+app.use("/", (req, res) => res.sendFile(__dirname + "/public/index.html"));
+
+app.use((req, res) => res.status(404).send("Sorry can't find that!"));
+// Send every request to the React app
+// Define any API routes before this runs
+app.get("*", function(req, res) {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
+
+app.listen(PORT, function() {
+  console.log(`🌎 ==> Server now on port ${PORT}!`);
+});
 
 // // get all searches
 // app.get("/api/saved/history", function (req, res) {
@@ -91,21 +109,4 @@ Article
 // }
 // })
 
-const db = mongoose.connection;
 
-db.on("error", error => console.log("Database Error:", error));
-
-db.once("open", () => console.log("Mongoose connection successful."));
-
-app.use("/", (req, res) => res.sendFile(__dirname + "/public/index.html"));
-
-app.use((req, res) => res.status(404).send("Sorry can't find that!"));
-// Send every request to the React app
-// Define any API routes before this runs
-app.get("*", function(req, res) {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
-});
-
-app.listen(PORT, function() {
-  console.log(`🌎 ==> Server now on port ${PORT}!`);
-});
